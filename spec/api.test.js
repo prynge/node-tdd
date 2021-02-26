@@ -2,11 +2,12 @@ const request = require('supertest')
 const app = require('../app')
 const db = require('../models');
 const cleanDb = require('./helpers/cleanDb')
+const api = require('./helpers/payload')
 
 require('./factories/post').factory
 require('./factories/author').factory
 const factory = require('factory-girl').factory
-
+/*
 beforeAll(async () => {
   await cleanDb(db)
 });
@@ -14,8 +15,8 @@ beforeAll(async () => {
 afterAll(async () => {
   await cleanDb(db)
   await db.close()
-});
-
+});*/
+/*
 describe('GET /', () => {
   let response;
 
@@ -29,7 +30,7 @@ describe('GET /', () => {
   });
 });
 
-describe('POST /author', () => {
+/*describe('POST /author', () => {
 
   let response;
   let data = {};
@@ -152,5 +153,24 @@ describe('POST /post', () => {
       expect(posts[0].title).toBe(post.title)
       expect(posts[0].content).toBe(post.content)
     })
+  })
+});*/
+
+describe('GET /events', () => {
+
+  let response;
+  let data = api;
+
+  console.log(data);
+  describe('when there is no payload', () => {
+    
+
+    test('It should respond with a 200 status code', async () => {
+      expect(response.statusCode).toBe(200);
+    });
+
+    
+
+    
   })
 });

@@ -1,8 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const db = require('./models')
+const api = require('./spec/helpers/payload')
 const postRoutes = require('./app/api/post')
 const authorRoutes = require('./app/api/author')
+const eventsRoutes = require('./app/api/events')
 
 const app = express()
 
@@ -32,7 +34,9 @@ app.get('/authors', async (req, res) => {
   })
 })
 
+
 postRoutes(app, db)
 authorRoutes(app, db)
+eventsRoutes(app, api)
 
 module.exports = app
