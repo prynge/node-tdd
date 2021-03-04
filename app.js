@@ -19,16 +19,35 @@ app.get('/', (req, res) => {
   res.status(200).send('Hello.')
 })
 
-app.post('/author', async (req, res) => {
-  await db.Author.create({
+app.post('/booking', async (req, res) => {
+  await db.Booking.create({
+    bookingId: req.body.bookingId,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    summary: req.body.summary,
+    status: req.body.status
+  }).then((result) => res.json(result))
+})
+
+app.get('/booking', async (req, res) => {
+  await db.Booking.findAll(
+    {attributes: ['id', 'bookingId', 'status', 'summary']}
+    
+  ).then((result) => {
+    return res.json(result)
+  })
+})
+
+app.post('/account', async (req, res) => {
+  await db.Account.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName
   }).then((result) => res.json(result))
 })
 
-app.get('/authors', async (req, res) => {
-  await db.Author.findAll(
-    {attributes: ['id', 'firstName', 'lastName']}
+app.get('/account', async (req, res) => {
+  await db.Account.findAll(
+    {attributes: ['id', 'mail', 'name']}
   ).then((result) => {
     return res.json(result)
   })
