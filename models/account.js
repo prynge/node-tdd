@@ -20,5 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Account',
   });
+
+  Account.associate = (models) => {
+    Account.belongsTo(models.Company, {foreignKey: 'CompanyId'})
+  }
   return Account;
 };
