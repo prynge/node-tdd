@@ -170,11 +170,11 @@ class EventConverter {
   
   client(){
     const clients = this.account.getClientUsers().map(client => this.payload.attendees.filter(attendee => client.email=== attendee.email))
-    return clients[0][0];
+    return clients[0];
   }
 
   employee(){
-    const clients = this.account.getClientUsers().map(client => this.payload.attendees.filter(attendee => client.email=== attendee.email))
+    const clients = this.account.getClientUsers().map(client => this.payload.attendees.filter(attendee => client.email!== attendee.email))
     return clients[0];
   }
 
@@ -223,6 +223,11 @@ describe('GET /events', () => {
       getEmployeeUsers(){}
 
     }
+
+    let company = {
+      companyId:"",
+      companyName:"Gembani",
+    }
   
     
 
@@ -235,21 +240,21 @@ describe('GET /events', () => {
       //expect(link.toString()).toEqual(expect.stringContaining("https://www.google.com/calendar/event?eid="))
     });
 
-    /*
+    
     test('It should respond with Client ', async () => {
       eventConverter = new EventConverter(payload,account);
-      client=eventConverter.employee()
+      client=eventConverter.client()
       console.log(client);
       //expect(client).toBe("client@client.com")
     });
 
     
-    /*test('It should respond with booking ', async () => {
+    test('It should respond with booking ', async () => {
       eventConverter = new EventConverter(payload,account);
       booking=eventConverter.booking()
       console.log(booking);
       expect(booking).not.toBe(undefined)
-    });*/
+    });
 
     
 
@@ -285,8 +290,8 @@ describe('GET /booking', () => {
 
   })
 });
-/*
-describe('POST /booking', () => {
+
+/*describe('POST /booking', () => {
 
   let response
   let data

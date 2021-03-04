@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Account.init({
-    mail: DataTypes.STRING,
-    name: DataTypes.STRING
+    accountId: DataTypes.INTEGER,
+    accountName: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Account',
